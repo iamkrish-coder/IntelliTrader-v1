@@ -4,85 +4,83 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from helper import Helper
 
 class Connection:
-    def __init__(self, config):
-        self.properties = config
- 
+    def __init__(self, object):
+        self.prop = object
+        self.help = Helper(object)
+
     def broker_login(self, KiteConnect):
+        # Assign properties
+        api_key = self.prop[0]
+        secret_key = self.prop[1]
+        user_id = self.prop[2]
+        user_pass = self.prop[3]
+        mfa_token = self.prop[4]
 
-        # assign properties
-        api_key = self.properties[0]
-        secret_key = self.properties[1]
-        user_id = self.properties[2]
-        user_pass = self.properties[3]
-        mfa_token = self.properties[4]
+        kite = KiteConnect(api_key=api_key)
 
-        kite = KiteConnect(api_key = api_key)
-
-        # initialize browser service
+        # Initialize browser service
         service = webdriver.chrome.service.Service('./driver/chromedriver')
         service.start()
         options = webdriver.ChromeOptions()
-        options.add_argument('--headless')
-        options = options.to_capabilities()
-        driver = webdriver.Remote(service.service_url, options=webdriver.ChromeOptions())
+        #options.add_argument('--headless')
+        driver = webdriver.Remote(service.service_url, options=options)
 
-        # auto enter login information
+        # Auto enter login information
         driver.get(kite.login_url())
-        driver.implicitly_wait(5)
+        driver.implicitly_wait(10)
 
-        # username input
+        # Username input
         username = WebDriverWait(driver, 10).until(
-            lambda x: x.find_element(by=By.XPATH, value='//*[@id="userid"]'))
+            EC.presence_of_element_located((By.XPATH, '//*[@id="userid"]'))
+        )
         username.send_keys(user_id)
-        
-        # password input
+
+        # Password input
         password = WebDriverWait(driver, 10).until(
-            lambda x: x.find_element(by=By.XPATH, value='//*[@id="password"]'))
+            EC.presence_of_element_located((By.XPATH, '//*[@id="password"]'))
+        )
         password.send_keys(user_pass)
 
         driver.implicitly_wait(5)
 
-        # submit button
+        # Submit button
         submit = WebDriverWait(driver, 10).until(
-            lambda x: x.find_element(by=By.XPATH, value='//*[@id="container"]/div/div/div[2]/form/div[4]/button'))
+            EC.presence_of_element_located((By.XPATH, '//*[@id="container"]/div/div/div[2]/form/div[4]/button'))
+        )
         submit.click()
 
-        # mfa / external TOTP 
+        # MFA / external TOTP
         totp = WebDriverWait(driver, 10).until(
-            lambda x: x.find_element(by=By.XPATH, value='//*[@id="container"]/div[2]/div/div/form/div[1]/input'))
+            EC.presence_of_element_located((By.XPATH, '//*[@id="container"]/div[2]/div/div/form/div[1]/input'))
+        )
         authkey = pyotp.TOTP(mfa_token)
         totp.send_keys(authkey.now())
 
-        def find(driver):
-            element = driver.find_element(by=By.XPATH, value='//*[@id="container"]/div[2]/div/div/form/div[2]/button')
-            if element:
-                return element
-            else:
-                return False
+        continue_btn = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, '//*[@id="container"]/div[2]/div/div/form/div[2]/button'))
+        )
+        continue_btn.click()
 
-        # continue button
-        continue_btn = WebDriverWait(driver, 10).until(find)
-        if(continue_btn != False):
-            driver.implicitly_wait(30)
-            continue_btn.click()
-
-        # request token generation
+        # Request token generation
         url = driver.current_url
-        initial_token = url.split('request_token=')[1]
-        request_token = initial_token.split('&')[0]
-        with open('./output/request_token.txt', 'w') as r_file:
-            r_file.write(request_token)
+        url_parts = url.split('request_token=')
+        if len(url_parts) > 1:
+            initial_token = url_parts[1]
+            request_token = initial_token.split('&')[0]
+            self.help.write_output_text('request_token.txt', request_token)
+        else:
+            # Handle the case when the 'request_token=' delimiter is not found
+            print("Error: 'request_token=' not found in the URL")
 
-        # access token generation
+        # Access token generation
         data = kite.generate_session(request_token, api_secret=secret_key)
         access_token = data['access_token']
-        with open('./output/access_token.txt', 'w') as a_file:
-            a_file.write(access_token)
+        self.help.write_output_text('access_token.txt', access_token)
 
-        driver.close()
+        driver.quit()
 
         return kite, request_token, access_token
-
-
