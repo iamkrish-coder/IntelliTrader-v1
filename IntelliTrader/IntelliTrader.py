@@ -6,7 +6,6 @@ from fetch import Fetch
 
 import os
 import pandas as pd
-import json
 
 user_cred_path = "./assets/user_credentials.txt"
 config = open(user_cred_path,'r').read().split()
