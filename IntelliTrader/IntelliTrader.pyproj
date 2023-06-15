@@ -27,6 +27,7 @@
   <ItemGroup>
     <Folder Include="driver\" />
     <Folder Include="assets\" />
+    <Folder Include="strategies\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

@@ -362,3 +362,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /IntelliTrader/assets/user_credentials.txt
+/IntelliTrader/output/access_token.txt
+/IntelliTrader/output/NSE_Instruments.csv
+/IntelliTrader/output/request_token.txt
