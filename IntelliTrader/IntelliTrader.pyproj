@@ -22,7 +22,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="connection.py" />
+    <Compile Include="fetch.py" />
+    <Compile Include="helper.py" />
     <Compile Include="IntelliTrader.py" />
+    <Compile Include="modify.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="driver\" />
