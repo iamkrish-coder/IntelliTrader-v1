@@ -55,8 +55,6 @@ class Connection:
         authkey = pyotp.TOTP(mfa_token)
         totp.send_keys(authkey.now())
 
-        driver.implicitly_wait(5)
-
         def find(driver):
             element = driver.find_element(by=By.XPATH, value='//*[@id="container"]/div[2]/div/div/form/div[2]/button')
             if element:
@@ -66,7 +64,8 @@ class Connection:
 
         # continue button
         continue_btn = WebDriverWait(driver, 10).until(find)
-        if(continue_btn):
+        if(continue_btn != False):
+            driver.implicitly_wait(30)
             continue_btn.click()
 
         # request token generation
