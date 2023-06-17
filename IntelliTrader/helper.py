@@ -28,12 +28,7 @@ class Helper:
             csv_data = pd.DataFrame(data)
             csv_data.to_csv(path + '/' + filename, index=False)
 
-    # Lookup instrument token 
-    def instrument_lookup(self, instrument_df, symbol):
-        try:
-            return instrument_df[instrument_df.tradingsymbol == symbol].instrument_token.values[0]
-        except:
-            return False
+
 
 
 
