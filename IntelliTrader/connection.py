@@ -1,16 +1,16 @@
 import pyotp
 import time
+import datetime
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from helper import Helper
+from helper import Helper 
 
 class Connection:
     def __init__(self, object):
         self.prop = object
-        self.help = Helper(object)
 
     def broker_login(self, KiteConnect):
         # Assign properties
@@ -71,7 +71,7 @@ class Connection:
         if len(url_parts) > 1:
             initial_token = url_parts[1]
             request_token = initial_token.split('&')[0]
-            self.help.write_output_text('request_token.txt', request_token)
+            Helper.write_text_output('request_token.txt', request_token)
         else:
             # Handle the case when the 'request_token=' delimiter is not found
             print("Error: 'request_token=' not found in the URL")
@@ -81,9 +81,11 @@ class Connection:
 
         # Access token generation
         data = kite.generate_session(request_token, api_secret=secret_key)
+
         access_token = data['access_token']
-        self.help.write_output_text('access_token.txt', access_token)
+        auth_date = datetime.datetime.now().strftime('%d');
+        Helper.write_text_output('access_token' + '_' + auth_date + '.txt', access_token)
 
         driver.quit()
 
-        return kite, request_token, access_token
+        return kite, access_token

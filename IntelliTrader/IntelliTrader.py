@@ -3,24 +3,46 @@ from kiteconnect import KiteConnect
 from connection import Connection
 from helper import Helper
 from fetch import Fetch
-
 import os
+import glob
+import datetime
 import pandas as pd
-import json
-
+                                                                
 user_cred_path = "./assets/user_credentials.txt"
 config = open(user_cred_path,'r').read().split()
 
-# Begin connection
-connect = Connection(config)
-kite, request_token, access_token = connect.broker_login(KiteConnect)
-kite.set_access_token(access_token)
+auth_date = datetime.datetime.now().strftime('%d');
+access_token_file = './output/access_token' + '_' + auth_date +  '.txt'
+
+if os.path.isfile(access_token_file):
+    # Generate trading session
+    access_token = open('./output/access_token' + '_' + auth_date +  '.txt','r').read()
+    kite = KiteConnect(api_key=config[0])
+    kite.set_access_token(access_token)
+else:
+    # Remove old access token before generating new one
+    old_access_token_files = glob.glob('./output/access_token*.txt')
+    for old_access_token_file in old_access_token_files:
+        try:
+            os.remove(old_access_token_file)
+        except: 
+            print("Error while deleting file : ", old_access_token_file)
+
+    # Begin a new connection
+    connect = Connection(config)
+    kite, access_token = connect.broker_login(KiteConnect)
+    kite.set_access_token(access_token)
 
 connection_kit = {
     "k_token" : kite,
-    "r_token" : request_token,
     "a_token" : access_token
 }
 
 help = Helper(connection_kit)
 fetch = Fetch(connection_kit)
+
+fetch.fetch_instruments() 
+fetch.fetch_instruments('NSE')
+fetch.fetch_instruments('NFO')
+#fetch.instrument_lookup('NSE', 'RELIANCE')
+#fetch.fetch_ohlc('NSE', 'RELIANCE', '5minute', 5)

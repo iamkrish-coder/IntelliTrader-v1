@@ -1,0 +1,28 @@
+Anaconda and Python Document
+
+Install Anaconda default settings
+Run Anaconda Prompt
+Create a new Env
+    conda create --name bazooka python=3.7
+    conda activate bazooka
+
+conda install Scikit-learn
+conda install MatPlotLib
+conda install pandas
+
+
+To Update Anaconda (Severe)
+conda update anaconda
+conda install spyder=5.4.3
+
+
+Historical API frequency and limit on number of candles fetched
+
+minute : 60 days
+3minute : 100 days
+5minute : 100 days
+10minute : 100 days
+15minute : 200 days
+30minute : 200 days
+60minute : 400 days
+day : 2000 days

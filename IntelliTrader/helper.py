@@ -7,7 +7,7 @@ class Helper:
         self.prop = object
 
     # Store output to a text file
-    def write_output_text(self, filename, data):
+    def write_text_output(filename, data):
         path = './output'
         if os.path.exists(path):
             with open(path + '/' + filename, 'w') as file:
@@ -18,7 +18,7 @@ class Helper:
                 file.write(data)
 
     # Store output to a csv file
-    def write_output_csv(self, filename, data):
+    def write_csv_output(filename, data):
         path = './output'
         if os.path.exists(path):
             csv_data = pd.DataFrame(data)
