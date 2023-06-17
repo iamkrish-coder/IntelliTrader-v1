@@ -365,3 +365,5 @@ FodyWeavers.xsd
 /IntelliTrader/output/access_token.txt
 /IntelliTrader/output/NSE_Instruments.csv
 /IntelliTrader/output/request_token.txt
+/IntelliTrader/output/bse_instruments.csv
+/IntelliTrader/output

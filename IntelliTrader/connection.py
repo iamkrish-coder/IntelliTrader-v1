@@ -45,7 +45,7 @@ class Connection:
         )
         password.send_keys(user_pass)
 
-        driver.implicitly_wait(5)
+        driver.implicitly_wait(10)
 
         # Submit button
         submit = WebDriverWait(driver, 10).until(
@@ -75,6 +75,9 @@ class Connection:
         else:
             # Handle the case when the 'request_token=' delimiter is not found
             print("Error: 'request_token=' not found in the URL")
+            with open('./output/request_token.txt', 'r') as r_file:
+                request_token = r_file.readline()
+                r_file.close()
 
         # Access token generation
         data = kite.generate_session(request_token, api_secret=secret_key)
