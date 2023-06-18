@@ -27,6 +27,7 @@ else:
             os.remove(old_access_token_file)
         except: 
             print("Error while deleting file : ", old_access_token_file)
+            exit()
 
     # Begin a new connection
     connect = Connection(config)
@@ -40,9 +41,3 @@ connection_kit = {
 
 help = Helper(connection_kit)
 fetch = Fetch(connection_kit)
-
-fetch.fetch_instruments() 
-fetch.fetch_instruments('NSE')
-fetch.fetch_instruments('NFO')
-#fetch.instrument_lookup('NSE', 'RELIANCE')
-#fetch.fetch_ohlc('NSE', 'RELIANCE', '5minute', 5)

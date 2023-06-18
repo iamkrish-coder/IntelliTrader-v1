@@ -63,7 +63,8 @@ class Connection:
         continue_btn = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="container"]/div[2]/div/div/form/div[2]/button'))
         )
-        continue_btn.click()
+
+        time.sleep(5)
 
         # Request token generation
         url = driver.current_url
