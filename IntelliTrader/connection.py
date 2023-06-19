@@ -9,8 +9,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from helper import Helper 
 
 class Connection:
-    def __init__(self, object):
-        self.prop = object
+    def __init__(self, params):
+        self.prop = params
 
     def broker_login(self, KiteConnect):
         # Assign properties
@@ -65,6 +65,7 @@ class Connection:
         )
 
         time.sleep(5)
+        auth_date = datetime.datetime.now().strftime('%H');
 
         # Request token generation
         url = driver.current_url
@@ -72,19 +73,17 @@ class Connection:
         if len(url_parts) > 1:
             initial_token = url_parts[1]
             request_token = initial_token.split('&')[0]
-            Helper.write_text_output('request_token.txt', request_token)
+            Helper.write_text_output('request_token' + '_' + auth_date + '.txt', request_token)
         else:
             # Handle the case when the 'request_token=' delimiter is not found
             print("Error: 'request_token=' not found in the URL")
-            with open('./output/request_token.txt', 'r') as r_file:
+            with open('./output/request_token' + '_' + auth_date + '.txt', 'r') as r_file:
                 request_token = r_file.readline()
                 r_file.close()
 
         # Access token generation
         data = kite.generate_session(request_token, api_secret=secret_key)
-
         access_token = data['access_token']
-        auth_date = datetime.datetime.now().strftime('%d');
         Helper.write_text_output('access_token' + '_' + auth_date + '.txt', access_token)
 
         driver.quit()

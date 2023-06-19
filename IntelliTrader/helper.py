@@ -3,8 +3,8 @@ import os
 import datetime as dt
 
 class Helper:
-    def __init__(self, object):
-        self.prop = object
+    def __init__(self, params):
+        self.prop = params
 
     # Store output to a text file
     def write_text_output(filename, data):

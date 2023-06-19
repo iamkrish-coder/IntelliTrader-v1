@@ -26,3 +26,23 @@ minute : 60 days
 30minute : 200 days
 60minute : 400 days
 day : 2000 days
+
+
+#variety	
+#   regular	    Regular order
+#   amo	        After Market Order
+#   co	            Cover Order ?
+#   iceberg	    Iceberg Order ?
+#   auction	    Auction Order ?
+
+
+#order_type	
+#   MARKET	Market order
+# 	LIMIT	Limit order
+# 	SL	    Stoploss order ?
+# 	SL-M	Stoploss-market order ?
+
+#product	
+#   CNC	    Cash & Carry for equity ?
+# 	NRML	Normal for futures and options ?
+# 	MIS	    Margin Intraday Squareoff for futures and options ?

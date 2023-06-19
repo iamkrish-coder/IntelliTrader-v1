@@ -5,12 +5,12 @@ import datetime as dt
 from helper import Helper
 
 class Fetch:
-    def __init__(self, object):
-        self.prop = object
+    def __init__(self, params):
+        self.prop = params
 
     # Fetch instruments list
     def fetch_instruments(self, exchange=None):
-        instruments_dump = self.prop['k_token'].instruments(exchange)
+        instruments_dump = self.prop['kite'].instruments(exchange)
         if exchange is not None:
             Helper.write_csv_output('instruments' + '_' + exchange + '.csv', instruments_dump)
         else:
@@ -19,7 +19,7 @@ class Fetch:
 
     # Lookup instrument token 
     def instrument_lookup(self, exchange, symbol):
-        nse_instruments_dump = self.prop['k_token'].instruments(exchange)
+        nse_instruments_dump = self.prop['kite'].instruments(exchange)
         instrument_df = pd.DataFrame(nse_instruments_dump)
         try:
             return instrument_df[instrument_df.tradingsymbol == symbol].instrument_token.values[0]
@@ -30,7 +30,7 @@ class Fetch:
     # Fetch historical data for an exchange and symbol    
     def fetch_ohlc(self, exchange, symbol, interval, duration):
         instrument_token = self.instrument_lookup(exchange, symbol)
-        data = pd.DataFrame(self.prop['k_token'].historical_data(instrument_token, dt.date.today()-dt.timedelta(duration), dt.date.today(), interval))
+        data = pd.DataFrame(self.prop['kite'].historical_data(instrument_token, dt.date.today()-dt.timedelta(duration), dt.date.today(), interval))
         Helper.write_csv_output('historical_' + exchange + '_' + symbol +  '.csv', data)
         return data
 
@@ -63,11 +63,11 @@ class Fetch:
         data = pd.DataFrame(columns=['date', 'open', 'high', 'low', 'close', 'volume'])
         while True:
             if start_date.date() >= (dt.date.today() - dt.timedelta(lookback_period_threshold)):
-                data = data._append(pd.DataFrame(self.prop['k_token'].historical_data(instrument_token, start_date, dt.date.today(), interval)), ignore_index=True)
+                data = data._append(pd.DataFrame(self.prop['kite'].historical_data(instrument_token, start_date, dt.date.today(), interval)), ignore_index=True)
                 break
             else:
                 end_date = start_date + dt.timedelta(lookback_period_threshold)
-                data = data._append(pd.DataFrame(self.prop['k_token'].historical_data(instrument_token, start_date, end_date, interval)), ignore_index=True)
+                data = data._append(pd.DataFrame(self.prop['kite'].historical_data(instrument_token, start_date, end_date, interval)), ignore_index=True)
                 start_date = end_date
     
         Helper.write_csv_output('historical_' + exchange + '_' + symbol + '_' + str(lookback_period_threshold) + '.csv', data)

@@ -26,6 +26,7 @@
     <Compile Include="helper.py" />
     <Compile Include="IntelliTrader.py" />
     <Compile Include="modify.py" />
+    <Compile Include="orders.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="driver\" />

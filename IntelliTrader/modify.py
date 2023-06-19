@@ -4,7 +4,7 @@ import datetime as dt
 from helper import Helper
 
 class Modify:
-    def __init__(self, object):
-        self.prop = object
+    def __init__(self, params):
+        self.prop = params
 
 
