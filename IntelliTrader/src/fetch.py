@@ -2,7 +2,7 @@ from tkinter.tix import COLUMN
 import pandas as pd
 import os
 import datetime as dt
-from helper import Helper
+from src.helper import Helper
 
 class Fetch:
     def __init__(self, params):
@@ -13,8 +13,10 @@ class Fetch:
         instruments_dump = self.prop['kite'].instruments(exchange)
         if exchange is not None:
             Helper.write_csv_output('instruments' + '_' + exchange + '.csv', instruments_dump)
+            self.prop['log'].info('Instruments fetched for exchange %s', exchange)
         else:
             Helper.write_csv_output('instruments.csv', instruments_dump)
+            self.prop['log'].info('Instruments fetched successfully')
         return instruments_dump
 
     # Lookup instrument token 
@@ -22,9 +24,11 @@ class Fetch:
         nse_instruments_dump = self.prop['kite'].instruments(exchange)
         instrument_df = pd.DataFrame(nse_instruments_dump)
         try:
-            return instrument_df[instrument_df.tradingsymbol == symbol].instrument_token.values[0]
+            instrument_token = instrument_df[instrument_df.tradingsymbol == symbol].instrument_token.values[0]
+            self.prop['log'].info('Instrument token %d obtained for symbol %s', instrument_token, symbol)
+            return instrument_token
         except:
-            print('Please verify that the symbol name [%s] is present in the specified exchange.' %(symbol))
+            self.prop['log'].warning('Please verify that the symbol name [%s] is present in the specified exchange.' %(symbol))
             exit()
             
     # Fetch historical data for an exchange and symbol    

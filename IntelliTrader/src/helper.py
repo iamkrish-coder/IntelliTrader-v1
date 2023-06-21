@@ -8,7 +8,7 @@ class Helper:
 
     # Store output to a text file
     def write_text_output(filename, data):
-        path = './output'
+        path = './src/output'
         if os.path.exists(path):
             with open(path + '/' + filename, 'w') as file:
                 file.write(data)
@@ -19,7 +19,7 @@ class Helper:
 
     # Store output to a csv file
     def write_csv_output(filename, data):
-        path = './output'
+        path = './src/output'
         if os.path.exists(path):
             csv_data = pd.DataFrame(data)
             csv_data.to_csv(path + '/' + filename, index=False)

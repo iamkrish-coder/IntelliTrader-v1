@@ -21,17 +21,18 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="connection.py" />
-    <Compile Include="fetch.py" />
-    <Compile Include="helper.py" />
+    <Compile Include="src\connection.py" />
+    <Compile Include="src\fetch.py" />
+    <Compile Include="src\helper.py" />
     <Compile Include="IntelliTrader.py" />
-    <Compile Include="modify.py" />
-    <Compile Include="orders.py" />
+    <Compile Include="src\modify.py" />
+    <Compile Include="src\orders.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="driver\" />
+    <Folder Include="src\driver\" />
     <Folder Include="assets\" />
-    <Folder Include="strategies\" />
+    <Folder Include="src\" />
+    <Folder Include="src\strategies\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

@@ -46,3 +46,39 @@ day : 2000 days
 #   CNC	    Cash & Carry for equity ?
 # 	NRML	Normal for futures and options ?
 # 	MIS	    Margin Intraday Squareoff for futures and options ?
+
+if transaction == 'buy':
+    transaction_type = self.prop['kite'].TRANSACTION_TYPE_BUY
+elif transaction == 'sell':
+    transaction_type = self.prop['kite'].TRANSACTION_TYPE_SELL
+else:
+    self.prop['log'].error("The order placement does not have a specified action to buy or sell.")
+    exit()
+
+#order_single = [{
+#    "exchange":exchange,
+#    "tradingsymbol": symbol,
+#    "transaction_type": self.prop['kite'].transaction,
+#    "quantity": quantity,
+#    "order_type": otype,
+#    "product": product,
+#    "price": price,
+#}]
+
+#order_oco = [{
+#    "exchange":"NSE",
+#    "tradingsymbol": "SBIN",
+#    "transaction_type": self.prop['kite'].transaction,
+#    "quantity": 1,
+#    "order_type": "LIMIT",
+#    "product": "CNC",
+#    "price": price
+#    },{
+#    "exchange":"NSE",
+#    "tradingsymbol": "SBIN",
+#    "transaction_type": self.prop['kite'].TRANSACTION_TYPE_SELL,
+#    "quantity": 1,
+#    "order_type": "LIMIT",
+#    "product": "CNC",
+#    "price": 480
+#}]
