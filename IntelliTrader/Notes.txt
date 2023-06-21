@@ -28,24 +28,24 @@ minute : 60 days
 day : 2000 days
 
 
-#variety	
-#   regular	    Regular order
-#   amo	        After Market Order
-#   co	            Cover Order ?
-#   iceberg	    Iceberg Order ?
-#   auction	    Auction Order ?
+variety	
+   regular	    Regular order
+   amo	        After Market Order
+   co	            Cover Order ?
+   iceberg	    Iceberg Order ?
+   auction	    Auction Order ?
 
 
-#order_type	
-#   MARKET	Market order
-# 	LIMIT	Limit order
-# 	SL	    Stoploss order ?
-# 	SL-M	Stoploss-market order ?
+order_type	
+   MARKET	Market order
+ 	LIMIT	Limit order
+ 	SL	    Stoploss order ?
+ 	SL-M	Stoploss-market order ?
 
-#product	
-#   CNC	    Cash & Carry for equity ?
-# 	NRML	Normal for futures and options ?
-# 	MIS	    Margin Intraday Squareoff for futures and options ?
+product	
+   CNC	    Cash & Carry for equity ?
+ 	NRML	Normal for futures and options ?
+ 	MIS	    Margin Intraday Squareoff for futures and options ?
 
 if transaction == 'buy':
     transaction_type = self.prop['kite'].TRANSACTION_TYPE_BUY
@@ -55,30 +55,42 @@ else:
     self.prop['log'].error("The order placement does not have a specified action to buy or sell.")
     exit()
 
-#order_single = [{
-#    "exchange":exchange,
-#    "tradingsymbol": symbol,
-#    "transaction_type": self.prop['kite'].transaction,
-#    "quantity": quantity,
-#    "order_type": otype,
-#    "product": product,
-#    "price": price,
-#}]
+order_single = [{
+    "exchange":exchange,
+    "tradingsymbol": symbol,
+    "transaction_type": self.prop['kite'].transaction,
+    "quantity": quantity,
+    "order_type": otype,
+    "product": product,
+    "price": price,
+}]
 
-#order_oco = [{
-#    "exchange":"NSE",
-#    "tradingsymbol": "SBIN",
-#    "transaction_type": self.prop['kite'].transaction,
-#    "quantity": 1,
-#    "order_type": "LIMIT",
-#    "product": "CNC",
-#    "price": price
-#    },{
-#    "exchange":"NSE",
-#    "tradingsymbol": "SBIN",
-#    "transaction_type": self.prop['kite'].TRANSACTION_TYPE_SELL,
-#    "quantity": 1,
-#    "order_type": "LIMIT",
-#    "product": "CNC",
-#    "price": 480
-#}]
+order_oco = [{
+    "exchange":"NSE",
+    "tradingsymbol": "SBIN",
+    "transaction_type": self.prop['kite'].transaction,
+    "quantity": 1,
+    "order_type": "LIMIT",
+    "product": "CNC",
+    "price": price
+    },{
+    "exchange":"NSE",
+    "tradingsymbol": "SBIN",
+    "transaction_type": self.prop['kite'].TRANSACTION_TYPE_SELL,
+    "quantity": 1,
+    "order_type": "LIMIT",
+    "product": "CNC",
+    "price": 480
+}]
+
+
+res = fetch.fetch_quote('NSE', 'AAVAS')
+
+res = fetch.fetch_ltp('NSE', 'AAVAS')
+
+res = fetch.fetch_positions()
+
+res = fetch.fetch_holdings()
+
+res = fetch.fetch_orders()
+logging.info(res)

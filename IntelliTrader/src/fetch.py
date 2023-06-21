@@ -77,5 +77,27 @@ class Fetch:
         Helper.write_csv_output('historical_' + exchange + '_' + symbol + '_' + str(lookback_period_threshold) + '.csv', data)
         return data
 
+    # Fetch quote
+    def fetch_quote(self, exchange, symbol):
+        quote = self.prop['kite'].quote(exchange+':'+symbol)
+        return quote
 
- 
+    # Fetchltp 
+    def fetch_ltp(self, exchange, symbol):
+        last_traded_price = self.prop['kite'].ltp(exchange+':'+symbol)
+        return last_traded_price
+
+    # Fetch orders 
+    def fetch_orders(self):
+        orders = self.prop['kite'].orders()
+        return orders
+
+    # Fetch positions 
+    def fetch_positions(self):
+        positions = self.prop['kite'].positions()
+        return positions
+
+    # Fetch holdings
+    def fetch_holdings(self):
+        holdings = self.prop['kite'].holdings()
+        return holdings
