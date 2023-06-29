@@ -12,7 +12,7 @@ class Connection:
     def __init__(self, params):
         self.prop = params
 
-    def broker_login(self, KiteConnect, logging):
+    def broker_login(self, KiteConnect, KiteTicker, logging):
         # Assign properties
         api_key = self.prop[0]
         secret_key = self.prop[1]
@@ -88,6 +88,9 @@ class Connection:
         Helper.write_text_output('access_token' + '_' + auth_date + '.txt', access_token)
         logging.info("Kite access_token generated successfully")
 
+        # Kite Ticker Subscription
+        kite_ticker = KiteTicker(api_key, access_token)
+
         driver.quit()
 
-        return kite, access_token
+        return kite, kite_ticker, access_token

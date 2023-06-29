@@ -20,7 +20,7 @@ class Fetch:
         return instruments_dump
 
     # Lookup instrument token 
-    def instrument_lookup(self, exchange, symbol):
+    def instrument_token_lookup(self, exchange, symbol):
         nse_instruments_dump = self.prop['kite'].instruments(exchange)
         instrument_df = pd.DataFrame(nse_instruments_dump)
         try:
@@ -30,10 +30,23 @@ class Fetch:
         except:
             self.prop['log'].warning('Please verify that the symbol name [%s] is present in the specified exchange.' %(symbol))
             exit()
+
+    # Lookup instrument token list (web streaming)
+    def stream_instrument_token_lookup(self, exchange, symbol_list):
+        nse_instruments_dump = self.prop['kite'].instruments(exchange)
+        instrument_df = pd.DataFrame(nse_instruments_dump)
+        token_list = []
+        try:
+            for symbol in symbol_list:
+                token_list.append(int(instrument_df[instrument_df.tradingsymbol == symbol].instrument_token.values[0]))
+            return token_list
+        except:
+            self.prop['log'].warning('Please verify that the symbol name [%s] is present in the specified exchange.' %(symbol))
+            exit()
             
     # Fetch historical data for an exchange and symbol    
     def fetch_ohlc(self, exchange, symbol, interval, duration):
-        instrument_token = self.instrument_lookup(exchange, symbol)
+        instrument_token = self.instrument_token_lookup(exchange, symbol)
         data = pd.DataFrame(self.prop['kite'].historical_data(instrument_token, dt.date.today()-dt.timedelta(duration), dt.date.today(), interval))
         Helper.write_csv_output('historical_' + exchange + '_' + symbol +  '.csv', data)
         return data
@@ -61,7 +74,7 @@ class Fetch:
                 lookback_period_threshold = 1
 
 
-        instrument_token = self.instrument_lookup(exchange, symbol)
+        instrument_token = self.instrument_token_lookup(exchange, symbol)
         start_date = dt.datetime.strptime(period_start, '%d-%m-%Y')
         end_date = dt.date.today()
         data = pd.DataFrame(columns=['date', 'open', 'high', 'low', 'close', 'volume'])

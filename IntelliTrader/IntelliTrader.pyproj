@@ -27,6 +27,8 @@
     <Compile Include="IntelliTrader.py" />
     <Compile Include="src\modify.py" />
     <Compile Include="src\orders.py" />
+    <Compile Include="src\ticker.py" />
+    <Compile Include="src\ticker.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\driver\" />
