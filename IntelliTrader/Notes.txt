@@ -94,3 +94,21 @@ res = fetch.fetch_holdings()
 
 res = fetch.fetch_orders()
 logging.info(res)
+
+
+
+# Validations 
+if isinstance(data, pd.DataFrame):
+    # If data is a dictionary, convert it to a pandas Series using the 'close' key
+    data = pd.Series(data)
+elif isinstance(data, dict):
+    # If data is a dictionary, convert it to a pandas Series using the 'close' key
+    data = pd.Series(data)
+elif isinstance(data, (list, tuple)):
+    # If data is not a pandas DataFrame, convert it to a pandas Series
+    data = pd.Series(data)
+elif isinstance(data, (int, float)):
+    # If data is an integer or float, convert it to a pandas Series
+    data = pd.Series([data])
+else:
+    print("Calculating MACD...")

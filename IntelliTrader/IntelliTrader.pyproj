@@ -21,10 +21,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="src\indicator.py" />
     <Compile Include="src\connection.py" />
     <Compile Include="src\fetch.py" />
     <Compile Include="src\helper.py" />
     <Compile Include="IntelliTrader.py" />
+    <Compile Include="src\indicators\macd.py" />
     <Compile Include="src\modify.py" />
     <Compile Include="src\orders.py" />
     <Compile Include="src\ticker.py" />
@@ -34,6 +36,7 @@
     <Folder Include="src\driver\" />
     <Folder Include="assets\" />
     <Folder Include="src\" />
+    <Folder Include="src\indicators\" />
     <Folder Include="src\strategies\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
