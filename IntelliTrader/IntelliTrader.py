@@ -16,7 +16,7 @@ import logging as trace
                           
 # Create and configure logger
 trace.basicConfig(
-    level=trace.INFO,
+    level=trace.DEBUG,
     format='%(asctime)s [%(levelname)s] #%(lineno)s - %(module)s - Message: %(message)s', 
     datefmt='%Y-%m-%d %H:%M:%S')
 
@@ -74,8 +74,8 @@ indicator = Indicator(connection_kit)
 # Input values
 exchange = 'NSE'
 symbol = 'SBIN'
-interval = '5minute'
-duration = 1 # in days
+interval = '15minute'
+duration = 2
 
 # Module usage
 
@@ -106,4 +106,6 @@ datasource = fetch.fetch_ohlc(exchange, symbol, interval, duration)
 print("\nThe OHLC values for {}:{} on {} timeframe: \n{}".format(exchange, symbol, interval, datasource))
 
 ##### Indicators #####
-indicator.execute_handler('macd', datasource)
+#indicator.execute_handler('macd', datasource)
+#indicator.execute_handler('rsi', datasource)
+

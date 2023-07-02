@@ -5,6 +5,7 @@ import time
 import pandas as pd
 from src.helper import Helper
 from src.indicators.macd import macd
+from src.indicators.rsi import rsi
 
 class Indicator:
     def __init__(self, params):
@@ -14,8 +15,8 @@ class Indicator:
         match indicator_option:
             case 'macd':
                 self.option_macd(dataset)
-            #case 'rsi':
-            #    self.option_rsi(dataset)
+            case 'rsi':
+                self.option_rsi(dataset)
             #case 'atr':
             #    self.option_atr(dataset)
             #case 'sma':
@@ -47,6 +48,21 @@ class Indicator:
         except:
              self.prop['log'].error("The received object is not a valid DataFrame") 
 
+    def option_rsi(self, dataset):
+            try:
+                if dataset is not None and not dataset.empty:
+                    # Calculate RSI
+                    pdf = pd.DataFrame(dataset['close'])
+                    rsi_line = rsi(pdf)
+
+                    # Print the calculated RSI values
+                    print("\nRSI Line:")
+                    print(rsi_line)
+                else:
+                    self.prop['log'].error("Failed to calculate RSI") 
+                    return False
+            except:
+                 self.prop['log'].error("The received object is not a valid DataFrame") 
 
     def invalid_option(self, dataset):
         # Invalid indicator option provided

@@ -1,7 +1,7 @@
 import pandas as pd
 
 def macd(dataset, short_period=12, long_period=26, signal_period=9):
-    data = dataset['close'] if 'close' in dataset else dataset
+    data = dataset['close'] if 'close' in dataset else None
     if data is not None and not data.empty:
         # Check if data has sufficient length for MACD calculations
         if len(data) < long_period:
