@@ -1,6 +1,7 @@
 import numpy as np
 
 def rsi(dataset, period=14):
+    # Check if dataset contains the required columns
     data = dataset['close'] if 'close' in dataset else None
     # Check if data has sufficient length for RSI calculations
     if len(data) < period:

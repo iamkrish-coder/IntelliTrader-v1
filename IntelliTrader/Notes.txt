@@ -112,3 +112,6 @@ elif isinstance(data, (int, float)):
     data = pd.Series([data])
 else:
     print("Calculating MACD...")
+
+
+    last_value = ema_line.iloc[-1]
