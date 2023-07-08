@@ -30,6 +30,7 @@
     <Compile Include="src\indicators\ma.py" />
     <Compile Include="src\indicators\macd.py" />
     <Compile Include="src\indicators\rsi.py" />
+    <Compile Include="src\indicators\williams_r.py" />
     <Compile Include="src\modify.py" />
     <Compile Include="src\orders.py" />
     <Compile Include="src\ticker.py" />
