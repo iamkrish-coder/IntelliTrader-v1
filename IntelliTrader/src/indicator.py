@@ -7,6 +7,7 @@ from src.helper import Helper
 from src.indicators.macd import macd
 from src.indicators.rsi import rsi
 from src.indicators.atr import atr
+from src.indicators.williams_r import williams_r
 import src.indicators.ma as ma
 
 class Indicator:
@@ -25,6 +26,8 @@ class Indicator:
                 self.option_sma(dataset)
             case 'ema':
                 self.option_ema(dataset)
+            case 'williams_r':
+                self.option_williams_r(dataset)
             case _:
                 self.invalid_option(dataset)
 
@@ -117,6 +120,23 @@ class Indicator:
                     print(ema_line)
                 else:
                     self.prop['log'].error("Failed to calculate EMA") 
+                    return False
+            except:
+                 self.prop['log'].error("The received object is not a valid DataFrame") 
+
+    def option_williams_r(self, dataset):
+            try:
+                if dataset is not None and not dataset.empty:
+                    # Calculate Williams %R
+                    pdf = pd.DataFrame(dataset)
+                    williams_r_line = williams_r(pdf)
+                    last_williams_r_value = williams_r_line[-1]
+
+                    # Print the calculated Williams %R values
+                    print("\nWilliams %R Line:")
+                    print(williams_r_line)
+                else:
+                    self.prop['log'].error("Failed to calculate Williams Range") 
                     return False
             except:
                  self.prop['log'].error("The received object is not a valid DataFrame") 

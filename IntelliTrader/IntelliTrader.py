@@ -16,7 +16,7 @@ import logging as trace
                           
 # Create and configure logger
 trace.basicConfig(
-    level=trace.INFO,
+    level=trace.DEBUG,
     format='%(asctime)s [%(levelname)s] #%(lineno)s - %(module)s - Message: %(message)s', 
     datefmt='%Y-%m-%d %H:%M:%S')
 
@@ -111,3 +111,4 @@ indicator.execute_handler('rsi', datasource)
 indicator.execute_handler('atr', datasource)
 indicator.execute_handler('sma', datasource)
 indicator.execute_handler('ema', datasource)
+indicator.execute_handler('williams_r', datasource)
