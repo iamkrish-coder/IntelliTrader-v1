@@ -27,4 +27,5 @@ def rsi(dataset, period=14):
 
     rs = np.array(up_periods) / np.array(down_periods)
     rsi_line = 100 - (100 / (1 + rs))
+    
     return rsi_line

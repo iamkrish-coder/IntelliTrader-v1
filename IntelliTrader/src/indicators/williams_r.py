@@ -20,4 +20,5 @@ def williams_r(dataset, period=14, factor=100):
             lowest_lows.append(lowest_low)
             wr = (highest_high - data['close'].iloc[i]) / (highest_high - lowest_low) * -100
             williams_r_line.append(wr)
+        
         return williams_r_line

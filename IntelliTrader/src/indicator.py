@@ -9,6 +9,7 @@ from src.indicators.rsi import rsi
 from src.indicators.atr import atr
 from src.indicators.williams_r import williams_r
 import src.indicators.ma as ma
+from src.indicators.vwap import vwap
 
 class Indicator:
     def __init__(self, params):
@@ -28,6 +29,8 @@ class Indicator:
                 self.option_ema(dataset)
             case 'williams_r':
                 self.option_williams_r(dataset)
+            case 'vwap':
+                self.option_vwap(dataset)
             case _:
                 self.invalid_option(dataset)
 
@@ -37,9 +40,9 @@ class Indicator:
                 # Calculate MACD
                 pdf = pd.DataFrame(dataset)
                 macd_line, signal_line, macd_histogram = macd(pdf)
-                last_macd_value = macd_line[-1]
-                last_signal_value = signal_line[-1]
-                last_histogram_value = macd_histogram[-1]
+                last_macd_value = macd_line.iloc[-1]
+                last_signal_value = signal_line.iloc[-1]
+                last_histogram_value = macd_histogram.iloc[-1]
 
                 # Print the calculated MACD values
                 print("\nMACD Line:")
@@ -137,6 +140,23 @@ class Indicator:
                     print(williams_r_line)
                 else:
                     self.prop['log'].error("Failed to calculate Williams Range") 
+                    return False
+            except:
+                 self.prop['log'].error("The received object is not a valid DataFrame") 
+
+    def option_vwap(self, dataset):
+            try:
+                if dataset is not None and not dataset.empty:
+                    # Calculate VWAP
+                    pdf = pd.DataFrame(dataset)
+                    vwap_line = vwap(pdf)
+                    last_vwap_value = vwap_line.iloc[-1]
+
+                    # Print the calculated VWAP values
+                    print("\nVWAP Line:")
+                    print(vwap_line)
+                else:
+                    self.prop['log'].error("Failed to calculate VWAP") 
                     return False
             except:
                  self.prop['log'].error("The received object is not a valid DataFrame") 
