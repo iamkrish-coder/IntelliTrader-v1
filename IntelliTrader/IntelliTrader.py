@@ -113,6 +113,6 @@ indicator.execute_handler('sma', datasource)
 indicator.execute_handler('ema', datasource)
 indicator.execute_handler('williams_r', datasource)
 indicator.execute_handler('vwap', datasource)
-#indicator.execute_handler('adx', datasource)
+indicator.execute_handler('adx', datasource)
 
 

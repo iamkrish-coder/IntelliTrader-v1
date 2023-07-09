@@ -10,6 +10,7 @@ from src.indicators.atr import atr
 from src.indicators.williams_r import williams_r
 import src.indicators.ma as ma
 from src.indicators.vwap import vwap
+from src.indicators.adx import adx
 
 class Indicator:
     def __init__(self, params):
@@ -31,6 +32,8 @@ class Indicator:
                 self.option_williams_r(dataset)
             case 'vwap':
                 self.option_vwap(dataset)
+            case 'adx':
+                self.option_adx(dataset)
             case _:
                 self.invalid_option(dataset)
 
@@ -160,6 +163,24 @@ class Indicator:
                     return False
             except:
                  self.prop['log'].error("The received object is not a valid DataFrame") 
+
+    def option_adx(self, dataset):
+            try:
+                if dataset is not None and not dataset.empty:
+                    # Calculate ADX
+                    pdf = pd.DataFrame(dataset)
+                    adx_line = adx(pdf)
+                    last_adx_value = adx_line.iloc[-1]
+
+                    # Print the calculated ADX values
+                    print("\nADX Line:")
+                    print(adx_line)
+                else:
+                    self.prop['log'].error("Failed to calculate ADX") 
+                    return False
+            except:
+                 self.prop['log'].error("The received object is not a valid DataFrame") 
+
 
     def invalid_option(self, dataset):
         # Invalid indicator option provided
