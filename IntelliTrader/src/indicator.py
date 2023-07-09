@@ -12,12 +12,13 @@ import src.indicators.ma as ma
 from src.indicators.vwap import vwap
 from src.indicators.adx import adx
 from src.indicators.stochastic import stochastic
+from src.indicators.renko import renko
 
 class Indicator:
     def __init__(self, params):
         self.prop = params
 
-    def execute_handler(self, indicator_option, dataset):
+    def execute_handler(self, indicator_option, dataset, period=0):
         match indicator_option:
             case 'macd':
                 self.option_macd(dataset)
@@ -37,6 +38,9 @@ class Indicator:
                 self.option_adx(dataset)
             case 'stochastic':
                 self.option_stochastic(dataset)
+            case 'renko':
+                self.option_renko(dataset, period)
+                
             case _:
                 self.invalid_option(dataset)
 
@@ -201,6 +205,23 @@ class Indicator:
                     print(stochastic_line_d)
                 else:
                     self.prop['log'].error("Failed to calculate Stochastic") 
+                    return False
+            except:
+                 self.prop['log'].error("The received object is not a valid DataFrame") 
+
+    def option_renko(self, dataset, period):
+            try:
+                if dataset is not None and not dataset.empty:
+                    # Calculate Renko
+                    pdf = pd.DataFrame(dataset)
+                    renko_bricks = renko(pdf, period)
+                    last_renko_brick = renko_bricks.iloc[-1]
+
+                    # Print the calculated Renko values
+                    print("\nRenko Bricks:")
+                    print(renko_bricks)
+                else:
+                    self.prop['log'].error("Failed to calculate Renko") 
                     return False
             except:
                  self.prop['log'].error("The received object is not a valid DataFrame") 

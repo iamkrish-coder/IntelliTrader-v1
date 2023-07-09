@@ -30,6 +30,7 @@
     <Compile Include="src\indicators\atr.py" />
     <Compile Include="src\indicators\ma.py" />
     <Compile Include="src\indicators\macd.py" />
+    <Compile Include="src\indicators\renko.py" />
     <Compile Include="src\indicators\rsi.py" />
     <Compile Include="src\indicators\stochastic.py" />
     <Compile Include="src\indicators\vwap.py" />

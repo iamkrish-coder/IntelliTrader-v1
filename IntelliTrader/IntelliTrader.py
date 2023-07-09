@@ -115,5 +115,6 @@ indicator.execute_handler('williams_r', datasource)
 indicator.execute_handler('vwap', datasource)
 indicator.execute_handler('adx', datasource)
 indicator.execute_handler('stochastic', datasource)
+indicator.execute_handler('renko', datasource, 5)
 
 
