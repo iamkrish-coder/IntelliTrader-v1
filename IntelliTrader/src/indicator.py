@@ -11,6 +11,7 @@ from src.indicators.williams_r import williams_r
 import src.indicators.ma as ma
 from src.indicators.vwap import vwap
 from src.indicators.adx import adx
+from src.indicators.stochastic import stochastic
 
 class Indicator:
     def __init__(self, params):
@@ -34,6 +35,8 @@ class Indicator:
                 self.option_vwap(dataset)
             case 'adx':
                 self.option_adx(dataset)
+            case 'stochastic':
+                self.option_stochastic(dataset)
             case _:
                 self.invalid_option(dataset)
 
@@ -181,6 +184,26 @@ class Indicator:
             except:
                  self.prop['log'].error("The received object is not a valid DataFrame") 
 
+    def option_stochastic(self, dataset):
+            try:
+                if dataset is not None and not dataset.empty:
+                    # Calculate Stochastic
+                    pdf = pd.DataFrame(dataset)
+                    stochastic_line_k, stochastic_line_d = stochastic(pdf)
+                    last_stochastic_k_value = stochastic_line_k.iloc[-1]
+                    last_stochastic_d_value = stochastic_line_d.iloc[-1]
+
+                    # Print the calculated Stochastic values
+                    print("\nStochastic Line %K:")
+                    print(stochastic_line_k)
+                    
+                    print("\nStochastic Line %D:")
+                    print(stochastic_line_d)
+                else:
+                    self.prop['log'].error("Failed to calculate Stochastic") 
+                    return False
+            except:
+                 self.prop['log'].error("The received object is not a valid DataFrame") 
 
     def invalid_option(self, dataset):
         # Invalid indicator option provided
