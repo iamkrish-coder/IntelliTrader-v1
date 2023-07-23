@@ -3,6 +3,8 @@ import time
 import datetime
 from time import sleep
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -23,11 +25,8 @@ class Connection:
         kite = KiteConnect(api_key=api_key)
 
         # Initialize browser service
-        service = webdriver.chrome.service.Service('./src/driver/chromedriver')
-        service.start()
-        options = webdriver.ChromeOptions()
-        #options.add_argument('--headless')
-        driver = webdriver.Remote(service.service_url, options=options)
+        ChromeDriverManager(path = r"./src/driver/chromedriver").install()
+        driver = webdriver.Chrome(service=ChromeService('./src/driver/chromedriver'))
 
         # Auto enter login information
         driver.get(kite.login_url())

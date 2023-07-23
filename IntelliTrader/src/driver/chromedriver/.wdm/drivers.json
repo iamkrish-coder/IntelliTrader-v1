@@ -1,0 +1,6 @@
+{
+    "win32_chromedriver_latest_for_115.0.5790.102": {
+        "timestamp": "23/07/2023",
+        "binary_path": "./src/driver/chromedriver\\.wdm\\drivers\\chromedriver\\win32\\115.0.5790.102\\chromedriver-win32/chromedriver.exe"
+    }
+}

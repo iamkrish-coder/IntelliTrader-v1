@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="src\strategies\shared.py" />
+    <Compile Include="src\strategies\options.py" />
+    <Compile Include="src\strategy.py" />
     <Compile Include="src\indicator.py" />
     <Compile Include="src\connection.py" />
     <Compile Include="src\fetch.py" />

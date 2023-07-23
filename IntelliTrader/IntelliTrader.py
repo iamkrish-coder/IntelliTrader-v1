@@ -8,6 +8,7 @@ from src.fetch import Fetch
 from src.orders import Orders
 from src.ticker import Ticker
 from src.indicator import Indicator
+from src.strategy import Strategy
 import os
 import glob
 import datetime
@@ -70,6 +71,21 @@ fetch = Fetch(connection_kit)
 orders = Orders(connection_kit)
 ticker = Ticker(connection_kit)
 indicator = Indicator(connection_kit)
+strategy = Strategy(connection_kit)
+
+common_utils = {
+    'help' : help,
+    'fetch' : fetch,
+    'orders' : orders,
+    'ticker' : ticker,
+    'indicator' : indicator
+    } 
+
+#######################
+# Module Sample usage
+#######################
+
+historical_data_subscribed = False
 
 # Input values
 exchange = 'NSE'
@@ -77,12 +93,18 @@ symbol = 'SBICARD'
 interval = '15minute'
 duration = 3
 
-# Module usage
+user_input = {
+    'exchange' : 'NSE',
+    'intrument' : 'nifty50',
+    'type' : 'options',
+    'action' : 'buy'
+    }
+
 
 ##### Ticker #####
-ticker_exchange = exchange # NSE
-ticker_symbol = symbol   # VOLTAS
-ticker_mode = ''     # QUOTE | LTP | FULL
+ticker_exchange = exchange  # NSE
+ticker_symbol = symbol      # VOLTAS
+ticker_mode = ''            # QUOTE | LTP | FULL
 user_settings = {
     'en_price' : 0,  # auto 
     'tp_price' : 0,  # auto 
@@ -102,19 +124,21 @@ ltp = result_ltp[key]['last_price']
 print("\nThe Last Traded Price (LTP) of {}:{} is {}\n".format(exchange, symbol, ltp))
 
 ##### Fetch OHLC #####
-datasource = fetch.fetch_ohlc(exchange, symbol, interval, duration)
-print("\nThe OHLC values for {}:{} on {} timeframe: \n{}".format(exchange, symbol, interval, datasource))
+if historical_data_subscribed:
+    datasource = fetch.fetch_ohlc(exchange, symbol, interval, duration)
+    print("\nThe OHLC values for {}:{} on {} timeframe: \n{}".format(exchange, symbol, interval, datasource))
 
-##### Indicators #####
-indicator.execute_handler('macd', datasource)
-indicator.execute_handler('rsi', datasource)
-indicator.execute_handler('atr', datasource)
-indicator.execute_handler('sma', datasource)
-indicator.execute_handler('ema', datasource)
-indicator.execute_handler('williams_r', datasource)
-indicator.execute_handler('vwap', datasource)
-indicator.execute_handler('adx', datasource)
-indicator.execute_handler('stochastic', datasource)
-indicator.execute_handler('renko', datasource, 5)
+    ##### Indicators #####
+    indicator.execute_handler('macd', datasource)
+    indicator.execute_handler('rsi', datasource)
+    indicator.execute_handler('atr', datasource)
+    indicator.execute_handler('sma', datasource)
+    indicator.execute_handler('ema', datasource)
+    indicator.execute_handler('williams_r', datasource)
+    indicator.execute_handler('vwap', datasource)
+    indicator.execute_handler('adx', datasource)
+    indicator.execute_handler('stochastic', datasource)
+    indicator.execute_handler('renko', datasource, 5)
 
-
+##### Strategies #####
+strategy.execute_handler(common_utils, user_input)
