@@ -28,8 +28,8 @@ class Fetch:
                 instrument_token = instrument_df[instrument_df.tradingsymbol == symbol].instrument_token.values[0]
                 self.prop['log'].info('Instrument token %d obtained for symbol %s', instrument_token, symbol)
                 return instrument_token
-            except:
-                self.prop['log'].warning('Please verify that the symbol name [%s] is present in the specified exchange.' %(symbol))
+            except Exception as e:
+                self.prop['log'].warning("An exception occurred: {}".format(e))
                 exit()
         else:
             self.prop['log'].warning('Please verify that the echange [%s] and symbol [%s] are present.' %(exchange) %(symbol))
@@ -45,8 +45,8 @@ class Fetch:
                 for symbol in symbol_list:
                     token_list.append(int(instrument_df[instrument_df.tradingsymbol == symbol].instrument_token.values[0]))
                 return token_list
-            except:
-                self.prop['log'].warning('Please verify that the symbol name [%s] is present in the specified exchange.' %(symbol))
+            except Exception as e:
+                self.prop['log'].warning("An exception occurred: {}".format(e))
                 exit()
         else:
             self.prop['log'].warning('Please verify that the echange [%s] and symbol_list [%s] are present.' %(exchange) %(symbol_list))

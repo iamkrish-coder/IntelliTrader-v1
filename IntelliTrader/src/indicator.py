@@ -66,8 +66,8 @@ class Indicator:
             else:
                 self.prop['log'].error("Failed to calculate MACD") 
                 return False
-        except:
-             self.prop['log'].error("The received object is not a valid DataFrame") 
+        except Exception as e:
+            self.prop['log'].error("An exception occurred: {}".format(e))
 
     def option_rsi(self, dataset):
             try:
@@ -83,8 +83,8 @@ class Indicator:
                 else:
                     self.prop['log'].error("Failed to calculate RSI") 
                     return False
-            except:
-                 self.prop['log'].error("The received object is not a valid DataFrame") 
+            except Exception as e:
+                self.prop['log'].error("An exception occurred: {}".format(e))
 
     def option_atr(self, dataset):
             try:
@@ -100,8 +100,8 @@ class Indicator:
                 else:
                     self.prop['log'].error("Failed to calculate ATR") 
                     return False
-            except:
-                 self.prop['log'].error("The received object is not a valid DataFrame") 
+            except Exception as e:
+                self.prop['log'].error("An exception occurred: {}".format(e))
 
     def option_sma(self, dataset):
             try:
@@ -117,8 +117,8 @@ class Indicator:
                 else:
                     self.prop['log'].error("Failed to calculate SMA") 
                     return False
-            except:
-                 self.prop['log'].error("The received object is not a valid DataFrame") 
+            except Exception as e:
+                self.prop['log'].error("An exception occurred: {}".format(e))
 
     def option_ema(self, dataset):
             try:
@@ -134,8 +134,8 @@ class Indicator:
                 else:
                     self.prop['log'].error("Failed to calculate EMA") 
                     return False
-            except:
-                 self.prop['log'].error("The received object is not a valid DataFrame") 
+            except Exception as e:
+                self.prop['log'].error("An exception occurred: {}".format(e))
 
     def option_williams_r(self, dataset):
             try:
@@ -151,8 +151,8 @@ class Indicator:
                 else:
                     self.prop['log'].error("Failed to calculate Williams Range") 
                     return False
-            except:
-                 self.prop['log'].error("The received object is not a valid DataFrame") 
+            except Exception as e:
+                self.prop['log'].error("An exception occurred: {}".format(e))
 
     def option_vwap(self, dataset):
             try:
@@ -168,8 +168,8 @@ class Indicator:
                 else:
                     self.prop['log'].error("Failed to calculate VWAP") 
                     return False
-            except:
-                 self.prop['log'].error("The received object is not a valid DataFrame") 
+            except Exception as e:
+                self.prop['log'].error("An exception occurred: {}".format(e))
 
     def option_adx(self, dataset):
             try:
@@ -185,8 +185,8 @@ class Indicator:
                 else:
                     self.prop['log'].error("Failed to calculate ADX") 
                     return False
-            except:
-                 self.prop['log'].error("The received object is not a valid DataFrame") 
+            except Exception as e:
+                self.prop['log'].error("An exception occurred: {}".format(e))
 
     def option_stochastic(self, dataset):
             try:
@@ -206,8 +206,8 @@ class Indicator:
                 else:
                     self.prop['log'].error("Failed to calculate Stochastic") 
                     return False
-            except:
-                 self.prop['log'].error("The received object is not a valid DataFrame") 
+            except Exception as e:
+                self.prop['log'].error("An exception occurred: {}".format(e))
 
     def option_renko(self, dataset, period):
             try:
@@ -223,8 +223,8 @@ class Indicator:
                 else:
                     self.prop['log'].error("Failed to calculate Renko") 
                     return False
-            except:
-                 self.prop['log'].error("The received object is not a valid DataFrame") 
+            except Exception as e:
+                self.prop['log'].error("An exception occurred: {}".format(e))
 
     def invalid_option(self, dataset):
         # Invalid indicator option provided

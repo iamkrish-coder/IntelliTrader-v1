@@ -41,16 +41,16 @@ else:
     for old_access_token_file in old_access_token_files:
         try:
             os.remove(old_access_token_file)
-        except: 
-            trace.error("Error while deleting file : ", old_access_token_file)
+        except Exception as e:
+            trace.error("An exception occurred: {}".format(e))
             exit()
 
     old_request_token_files = glob.glob('./src/output/request_token*.txt')
     for old_request_token_file in old_request_token_files:
         try:
             os.remove(old_request_token_file)
-        except: 
-            trace.error("Error while deleting file : ", old_request_token_file)
+        except Exception as e:
+            trace.error("An exception occurred: {}".format(e))
             exit()
 
     # Begin a new connection

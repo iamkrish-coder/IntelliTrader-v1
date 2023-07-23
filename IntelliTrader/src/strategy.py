@@ -1,6 +1,5 @@
 from src.helper import Helper
 import src.strategies.options as options
-import traceback
 
 class Strategy:
     def __init__(self, params):
@@ -44,7 +43,6 @@ class Strategy:
                 return False
         except Exception as e:
             self.prop['log'].error("An exception occurred: {}".format(e))
-            traceback.print_exc()
 
 
     def invalid_option(self, common_utils, user_input):
