@@ -94,11 +94,14 @@ interval = '15minute'
 duration = 3
 
 user_input = {
-    'exchange' : 'NSE',
-    'intrument' : 'nifty50',
-    'type' : 'options',
-    'action' : 'buy'
-    }
+    'exchange'  : 'NFO',
+    'type'      : 'options',
+    'action'    : 'buy',
+    'ticker'    : 'NIFTY',
+    'strike'    : ['CE', 'PE'],
+    'expiry'    : 0,   # current
+    'strikes'   : 5    # strikes offset from ATM
+}
 
 
 ##### Ticker #####

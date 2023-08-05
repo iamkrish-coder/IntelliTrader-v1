@@ -115,3 +115,36 @@ else:
 
 
     last_value = ema_line.iloc[-1]
+
+###############################################
+ATM Options Sample Output
+###############################################
+
+instrument_token             12254978
+exchange_token                  47871
+tradingsymbol       NIFTY2381019500CE
+name                            NIFTY
+last_price                        0.0
+expiry                     2023-08-10
+strike                        19500.0
+tick_size                        0.05
+lot_size                           50
+instrument_type                    CE
+segment                       NFO-OPT
+exchange                          NFO
+time_to_expiry                      4
+Name: 33, dtype: object
+
+instrument_token             12255234
+exchange_token                  47872
+tradingsymbol       NIFTY2381019500PE
+name                            NIFTY
+last_price                        0.0
+expiry                     2023-08-10
+strike                        19500.0
+tick_size                        0.05
+lot_size                           50
+instrument_type                    PE
+segment                       NFO-OPT
+exchange                          NFO
+time_to_expiry                      4

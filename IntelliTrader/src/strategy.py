@@ -9,6 +9,7 @@ class Strategy:
         match user_input['type']:
             case 'options':
                 self.init_options(common_utils, user_input)
+
             ####### Not implemented for now #######
             case 'delivery':
                pass
@@ -33,7 +34,7 @@ class Strategy:
                 }
                 match strategy_action:
                     case 'buy':
-                        options.nifty_scalper(dataset)
+                        options.nifty_scalper(self, dataset)
                     case 'sell':
                         pass
                     case _:

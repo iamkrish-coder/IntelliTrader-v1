@@ -25,8 +25,7 @@ class Connection:
         kite = KiteConnect(api_key=api_key)
 
         # Initialize browser service
-        ChromeDriverManager(path = r"./src/driver/chromedriver").install()
-        driver = webdriver.Chrome(service=ChromeService('./src/driver/chromedriver'))
+        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
         # Auto enter login information
         driver.get(kite.login_url())

@@ -44,7 +44,6 @@
     <Compile Include="src\ticker.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\driver\" />
     <Folder Include="assets\" />
     <Folder Include="src\" />
     <Folder Include="src\indicators\" />
