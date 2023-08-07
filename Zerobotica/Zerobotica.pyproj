@@ -4,13 +4,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>adfe1a4f-1f04-45be-8cae-c3e48ec6d988</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>IntelliTrader.py</StartupFile>
+    <StartupFile>Zerobotica.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>IntelliTrader</Name>
-    <RootNamespace>IntelliTrader</RootNamespace>
+    <Name>Zerobotica</Name>
+    <RootNamespace>Zerobotica</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,7 +28,7 @@
     <Compile Include="src\connection.py" />
     <Compile Include="src\fetch.py" />
     <Compile Include="src\helper.py" />
-    <Compile Include="IntelliTrader.py" />
+    <Compile Include="Zerobotica.py" />
     <Compile Include="src\indicators\adx.py" />
     <Compile Include="src\indicators\atr.py" />
     <Compile Include="src\indicators\ma.py" />

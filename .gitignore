@@ -361,14 +361,14 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/IntelliTrader/assets/user_credentials.txt
-/IntelliTrader/output/access_token.txt
-/IntelliTrader/output/NSE_Instruments.csv
-/IntelliTrader/output/request_token.txt
-/IntelliTrader/output/bse_instruments.csv
-/IntelliTrader/output
-/IntelliTrader/src/output/access_token_2123.txt
-/IntelliTrader/src/output/request_token_2123.txt
-/IntelliTrader/src/output/access_token_2108.txt
-/IntelliTrader/src/output/request_token_2108.txt
-/IntelliTrader/src/output
+/Zerobotica/assets/user_credentials.txt
+/Zerobotica/output/access_token.txt
+/Zerobotica/output/NSE_Instruments.csv
+/Zerobotica/output/request_token.txt
+/Zerobotica/output/bse_instruments.csv
+/Zerobotica/output
+/Zerobotica/src/output/access_token_2123.txt
+/Zerobotica/src/output/request_token_2123.txt
+/Zerobotica/src/output/access_token_2108.txt
+/Zerobotica/src/output/request_token_2108.txt
+/Zerobotica/src/output
